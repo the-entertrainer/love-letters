@@ -94,6 +94,12 @@ export function Letter({ item, index, isExpanded, onToggle }: LetterProps) {
                 <div className="glowing-border" />
 
                 <div className="relative z-10 space-y-5">
+                  {/* Word as stylish header */}
+                  <div>
+                    <div className="text-[10px] tracking-[3px] text-white/50 mb-0.5">THE WORD</div>
+                    <div className="text-3xl font-semibold tracking-[-1.5px] text-white mb-1">{item.word}</div>
+                  </div>
+
                   {/* Optional nice 3D reveal of the letter inside the expanded content (advanced but only visible after tap) */}
                   <div className="h-40 w-full -mx-1 mb-1 rounded-xl overflow-hidden border border-white/10">
                     <Letter3D letter={item.letter} themeColor={accent} />
@@ -111,6 +117,7 @@ export function Letter({ item, index, isExpanded, onToggle }: LetterProps) {
 
                     <SongPlayer
                       videoUrl={item.videoUrl}
+                      videoId={item.videoId}
                       songTitle={item.songTitle}
                       artist={item.artist}
                       language={item.language}

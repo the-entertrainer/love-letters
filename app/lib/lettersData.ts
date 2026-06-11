@@ -1,13 +1,15 @@
 export interface LetterData {
   id: string;
   letter: string;
+  word: string;
   message: string;
   songTitle: string;
   artist: string;
-  language: 'Tamil' | 'Malayalam' | 'English' | 'Mix';
-  videoUrl: string; // full embed URL or base; player will normalize
-  lyricsTeaser: string; // short translit + English feel
-  theme: string; // css var or tailwind friendly for accents (e.g. warm-gold)
+  language: 'Hindi' | 'English' | 'Tamil' | 'English/Spanish';
+  videoUrl: string; // full embed URL
+  videoId: string;  // for thumbnail
+  lyricsTeaser: string;
+  theme: string;
 }
 
 // Curated romantic songs where TITLE STARTS WITH THE LETTER.
@@ -18,100 +20,118 @@ export const lettersData: LetterData[] = [
   {
     id: 'J',
     letter: 'J',
-    message: 'J is for Joyful. Mostly because you actually put up with my nonsense — just like this foot-tapping Tamil melody captures pure, uncomplicated delight.',
-    songTitle: 'June Ponal',
-    artist: 'Harris Jayaraj (Unnale Unnale)',
-    language: 'Tamil',
-    videoUrl: 'https://www.youtube.com/embed/fNYUK8ksRJM',
-    lyricsTeaser: 'June ponal... July katre... (The monsoon of love arrives)',
+    word: 'Jaw-dropping',
+    message: "You're so jaw-droppingly gorgeous that my smartwatch thinks I'm doing a cardio workout every time you walk into the room.",
+    songTitle: 'Jhoome Jo Pathaan',
+    artist: 'Vishal & Sheykhar, Arijit Singh',
+    language: 'Hindi',
+    videoUrl: 'https://www.youtube.com/embed/YxWlaYCA8MU',
+    videoId: 'YxWlaYCA8MU',
+    lyricsTeaser: 'Jhoome jo pathaan... (The energy is irresistible)',
     theme: 'warm-gold',
   },
   {
     id: 'O',
     letter: 'O',
-    message: 'O is for Obsessed. Seriously, I might need an intervention — this tender Malayalam classic says it better than I ever could.',
-    songTitle: 'Oru Murai Vanthu Paarthaya',
-    artist: 'Najeem Arshad (Oru Murai Vanthu Paarthaya)',
-    language: 'Malayalam',
-    videoUrl: 'https://www.youtube.com/embed/W0fKl43QmIE', // representative "Oru..." romantic; swap for exact title match if needed
-    lyricsTeaser: 'Oru murai vanthu... (One time you came and looked...)',
+    word: 'Obsessed',
+    message: 'I\'m officially obsessed with you—like, "forgetting how to act normal in public" levels of obsessed.',
+    songTitle: 'Only Girl (In The World)',
+    artist: 'Rihanna',
+    language: 'English',
+    videoUrl: 'https://www.youtube.com/embed/pa14VNjOUto',
+    videoId: 'pa14VNjOUto',
+    lyricsTeaser: 'Only girl in the world... (You make me feel that way)',
     theme: 'deep-emerald',
   },
   {
     id: 'S',
     letter: 'S',
-    message: 'S is for Sensual. You know exactly what you do to me. This dreamy Malayalam melody wraps around the feeling like silk.',
-    songTitle: 'Sundariye Vaa',
-    artist: 'Franco (Malayalam romantic)',
-    language: 'Malayalam',
-    videoUrl: 'https://www.youtube.com/embed/dVdFzUqzJ-o',
-    lyricsTeaser: 'Sundariye vaa... (Come, my beautiful one...)',
+    word: 'Sparks',
+    message: 'Whenever you touch me, it’s not just sparks—it’s a full-blown electrical hazard.',
+    songTitle: 'Selfie Pulla',
+    artist: 'Vijay, Sunidhi Chauhan',
+    language: 'Tamil',
+    videoUrl: 'https://www.youtube.com/embed/cxGhtxUSO2E',
+    videoId: 'cxGhtxUSO2E',
+    lyricsTeaser: 'Selfie pulla... (Capturing every moment with you)',
     theme: 'rose',
   },
   {
     id: 'E',
     letter: 'E',
-    message: 'E is for Extra. Because you are, but I absolutely love it. This Tamil emotional powerhouse feels exactly like that beautiful excess of love.',
-    songTitle: 'Enakenna Yaarum Illaye',
-    artist: 'Anirudh (Aakko)',
-    language: 'Tamil',
-    videoUrl: 'https://www.youtube.com/embed/SPUJIbXN0WY', // kept spirit of original while fitting "E" start; real emotional Tamil "En..."
-    lyricsTeaser: 'Enakenna yaarum illaye... (Without you, no one else matters)',
+    word: 'Electric',
+    message: 'The chemistry between us is so electric, we could probably power up this entire city during a blackout.',
+    songTitle: 'Everytime We Touch',
+    artist: 'Cascada',
+    language: 'English',
+    videoUrl: 'https://www.youtube.com/embed/4G6QDNC4jPs',
+    videoId: '4G6QDNC4jPs',
+    lyricsTeaser: 'Everytime we touch... (I feel the rush)',
     theme: 'indigo',
   },
   {
     id: 'P',
     letter: 'P',
-    message: 'P is for Perfect. Well, almost. You do steal the covers — but this timeless English ballad says it all anyway.',
-    songTitle: 'Perfect',
-    artist: 'Ed Sheeran',
+    word: 'Pulse',
+    message: 'You make my pulse race so fast I’m pretty sure I need to sign a liability waiver before taking you out.',
+    songTitle: 'Physical',
+    artist: 'Dua Lipa',
     language: 'English',
-    videoUrl: 'https://www.youtube.com/embed/2Vv-BfVoq4g',
-    lyricsTeaser: 'I found a love... for me... (Darling, just dive right in...)',
+    videoUrl: 'https://www.youtube.com/embed/9HDEHj2yzew',
+    videoId: '9HDEHj2yzew',
+    lyricsTeaser: 'Let me take you to the physical... (Heart racing)',
     theme: 'soft-amber',
   },
   {
     id: 'H',
     letter: 'H',
-    message: 'H is for Hot. Like, stupidly hot. It’s almost unfair. This soulful Malayalam number burns with exactly that quiet fire.',
-    songTitle: 'Hridayathin', // representative H-start romantic from popular jukeboxes
-    artist: 'Various (Malayalam hits)',
-    language: 'Malayalam',
-    videoUrl: 'https://www.youtube.com/embed/bnVUHWCynig', // spirit of original H; real H-start emotional track
-    lyricsTeaser: 'Hridayathin... (From the heart...)',
+    word: 'Heat',
+    message: 'Are you made of pure heat, or did the room temperature just spike by twenty degrees when you looked at me?',
+    songTitle: "Hips Don't Lie",
+    artist: 'Shakira ft. Wyclef Jean',
+    language: 'English/Spanish',
+    videoUrl: 'https://www.youtube.com/embed/DUT5rEU6pqM',
+    videoId: 'DUT5rEU6pqM',
+    lyricsTeaser: 'My hips don\'t lie... (The fire is real)',
     theme: 'crimson',
   },
   {
     id: 'I',
     letter: 'I',
-    message: 'I is for Intoxicating. Better than a double shot of espresso. This English classic hits the veins the same way you do.',
-    songTitle: 'Iris',
-    artist: 'Goo Goo Dolls',
+    word: 'Intoxicating',
+    message: "Your vibe is so intoxicating that I'm genuinely wondering if I should call a cab just to get home safely.",
+    songTitle: 'Into You',
+    artist: 'Ariana Grande',
     language: 'English',
-    videoUrl: 'https://www.youtube.com/embed/Nl-8v5n3v9A', // popular romantic "I" starter (Iris)
-    lyricsTeaser: 'And I\'d give up forever to touch you... (You\'re the closest to heaven...)',
+    videoUrl: 'https://www.youtube.com/embed/1ekZEVeXwek',
+    videoId: '1ekZEVeXwek',
+    lyricsTeaser: 'A little bit dangerous... (But I like it)',
     theme: 'violet',
   },
   {
     id: 'N',
     letter: 'N',
-    message: 'N is for Naughty. I’ll just leave this one right here. This playful yet deeply felt Malayalam melody gets the mischief perfectly.',
-    songTitle: 'Nenjinullil',
-    artist: 'Malayalam romantic hits (from popular jukeboxes)',
-    language: 'Malayalam',
-    videoUrl: 'https://www.youtube.com/embed/wfN4PBQXbcY', // spirit; real N-start emotional
-    lyricsTeaser: 'Nenjinullil... (Deep in the heart...)',
+    word: 'Naughty',
+    message: "You have that perfectly naughty smile that tells me we're either going to have the absolute best time, or end up in trouble.",
+    songTitle: 'Nadiyon Paar (Let the Music Play Again)',
+    artist: 'Rashmeet Kaur, Shamur',
+    language: 'Hindi',
+    videoUrl: 'https://www.youtube.com/embed/hcMzwMrp1tE',
+    videoId: 'hcMzwMrp1tE',
+    lyricsTeaser: 'Nadiyon paar... (Let the music take us away)',
     theme: 'teal',
   },
   {
     id: 'E2',
     letter: 'E',
-    message: 'E is for Endgame. You’re stuck with me now, babe. This emotional Tamil closer feels like the final, beautiful chapter.',
-    songTitle: 'Ennale Ennale',
-    artist: 'Harris Jayaraj style / Tamil romantic (Kiss / similar)',
-    language: 'Tamil',
-    videoUrl: 'https://www.youtube.com/embed/waU75jdUnYw', // spirit of original E2 + real E-start emotional Tamil
-    lyricsTeaser: 'Ennale ennale... (With you, always...)',
+    word: 'Energy',
+    message: "I don't know what kind of chaotic, beautiful energy you're running on, but I want to match it for the rest of my life.",
+    songTitle: 'Euphoria',
+    artist: 'Loreen',
+    language: 'English',
+    videoUrl: 'https://www.youtube.com/embed/bWeO16aGzXQ',
+    videoId: 'bWeO16aGzXQ',
+    lyricsTeaser: 'We are forever... (This energy is eternal)',
     theme: 'deep-rose',
   },
 ];

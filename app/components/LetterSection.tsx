@@ -103,6 +103,7 @@ export default function LetterSection({ data, isOpen, onToggle, index }: LetterS
                   </div>
                   <SongPlayer
                     videoUrl={videoUrl}
+                    videoId={(data as any).videoId || ''}
                     songTitle={songTitle}
                     artist={artist}
                     language={language}
