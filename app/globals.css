@@ -2,364 +2,279 @@
 
 :root {
   --font-playfair: "Playfair Display", ui-serif, Georgia, serif;
-  --font-outfit: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-noto-sans: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-noto-tamil: "Noto Sans Tamil", ui-sans-serif, system-ui, sans-serif;
+  --font-noto-malayalam: "Noto Sans Malayalam", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 
-  /* Liquid Glass Tokens - Dark Glassy Liquid aesthetic */
-  --glass-bg: rgba(10, 10, 15, 0.72);
-  --glass-border: rgba(255, 255, 255, 0.09);
-  --glass-highlight: rgba(255, 255, 255, 0.14);
-  --glass-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.35), 0 10px 10px -5px rgb(0 0 0 / 0.25);
-  --glass-inset: inset 0 1px 0 0 rgba(255, 255, 255, 0.16), inset 0 -1px 0 0 rgba(0, 0, 0, 0.35);
+  /* Cinematic Romantic Dark Theme */
+  --bg-deep: #050507;
+  --bg-elevated: #0a0a10;
+  --text-primary: #f8f8fa;
+  --text-muted: #a1a1aa;
+  --accent-gold: #f4d35e;
+  --accent-rose: #f472b6;
+  --accent-emerald: #34d399;
+  --accent-indigo: #818cf8;
 
-  /* Glare & tracing */
-  --trace-speed: 3.6s;
+  /* 3D / Premium UI Tokens */
+  --canvas-bg: transparent;
+  --panel-glass: rgba(10, 10, 16, 0.82);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --glow-soft: 0 0 60px -15px rgb(244 211 94 / 0.15);
 }
 
+/* Font Stacks - Latin + Tamil/Malayalam first-class support */
 @theme inline {
   --color-background: #050507;
-  --color-foreground: #ededed;
-  --font-sans: var(--font-outfit);
+  --color-foreground: #f8f8fa;
+  --font-sans: var(--font-noto-sans);
   --font-serif: var(--font-playfair);
-  --font-mono: var(--font-geist-mono);
+  --font-tamil: var(--font-noto-tamil);
+  --font-malayalam: var(--font-noto-malayalam);
+  --font-mono: var(--font-mono);
 }
 
 /* Base */
 html, body {
-  font-family: var(--font-outfit);
+  font-family: var(--font-noto-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-deep);
+  color: var(--text-primary);
 }
 
-/* Full mobile-native viewport handling */
 html {
   height: 100%;
   overscroll-behavior: none;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: #050507;
-  color: #ededed;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
-/* 
-  Dark Glassy Liquid background with subtle shifting high-refractive radials.
-  Inspired by premium glassmorphism + Aceternity-style depth.
-*/
-.liquid-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: 
-    /* Deep base */
-    #050507,
-    /* Subtle violet/indigo refractive highlight */
-    radial-gradient(
-      ellipse 65% 55% at 22% 28%,
-      rgba(129, 140, 248, 0.065) 0%,
-      rgba(129, 140, 248, 0.015) 42%,
-      transparent 70%
-    ),
-    /* Cool blue shift */
-    radial-gradient(
-      ellipse 55% 65% at 78% 72%,
-      rgba(103, 232, 249, 0.04) 0%,
-      rgba(103, 232, 249, 0.012) 48%,
-      transparent 72%
-    ),
-    /* Soft warm accent for premium liquid feel */
-    radial-gradient(
-      ellipse 40% 50% at 65% 22%,
-      rgba(251, 146, 60, 0.025) 0%,
-      transparent 55%
-    );
-  background-size: 100% 100%, 140% 120%, 130% 130%, 110% 110%;
-  animation: liquid-drift 38s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes liquid-drift {
-  0%, 100% { background-position: 0% 0%, 18% 24%, 82% 78%, 62% 20%; }
-  50% { background-position: 4% 6%, 26% 32%, 74% 68%, 58% 28%; }
-}
-
-/* Scroll container: 100dvh + 100vw to avoid browser UI clipping on mobile */
-.snap-container {
+/* Cinematic 9:16 Mobile Native + Full Viewport */
+.snap-container,
+.main-journey {
   height: 100dvh;
   width: 100vw;
   overflow-y: auto;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: contain;
 }
 
-/* Each letter section snaps */
+/* Premium Scroll Experience (Lenis will enhance) */
 .letter-section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
-/* 
-  === Liquid Glass Card (multi-layered) ===
-  Replicates Aceternity/Linear GlareCard + liquid glass from high-end sources:
-  - backdrop-blur + saturate
-  - multi-layer via box-shadow + pseudo elements for depth + specular
-  - inner highlight + outer floating shadow
-*/
-.glass-card {
+/* 3D Canvas Containers - the new "glass" */
+.three-canvas-container {
   position: relative;
-  background: var(--glass-bg);
-  backdrop-filter: blur(26px) saturate(165%);
-  -webkit-backdrop-filter: blur(26px) saturate(165%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow), var(--glass-inset);
-  border-radius: 2.25rem; /* 36px - premium rounded */
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
   overflow: hidden;
-  isolation: isolate; /* for glare layers */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--canvas-bg);
+  box-shadow: var(--glow-soft);
+  border: 1px solid var(--panel-border);
 }
 
-/* Extra inner specular layer (multi-layered masking technique) */
-.glass-card::before {
+.three-canvas-container canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Global Particle / VFX Overlays */
+.particle-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+/* Cinematic Panel / Section Styling (replaces old glass boxes) */
+.cinematic-panel {
+  position: relative;
+  background: var(--panel-glass);
+  border: 1px solid var(--panel-border);
+  border-radius: 2.25rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  isolation: isolate;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+              box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cinematic-panel.expanded {
+  box-shadow: 0 35px 70px -15px rgb(0 0 0 / 0.5), var(--glow-soft);
+  transform: translateY(-4px);
+}
+
+/* Letter 3D Hero + Typography */
+.letter-hero {
+  font-family: var(--font-playfair);
+  font-size: clamp(4.5rem, 28vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  line-height: 0.78;
+  color: #fff;
+  text-shadow: 0 10px 30px rgb(0 0 0 / 0.5);
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.letter-hero:hover,
+.cinematic-panel.expanded .letter-hero {
+  text-shadow: 0 15px 40px rgb(0 0 0 / 0.6);
+  transform: scale(1.02);
+}
+
+/* Song / Language Badges - elegant, minimal */
+.lang-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  opacity: 0.85;
+}
+
+.lang-tamil { color: #f4d35e; border-color: #f4d35e33; }
+.lang-malayalam { color: #34d399; border-color: #34d39933; }
+.lang-english { color: #818cf8; border-color: #818cf833; }
+.lang-mix { color: #f472b6; border-color: #f472b633; }
+
+/* Message + Lyrics - premium readable */
+.message-text {
+  font-family: var(--font-noto-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: #e4e4e7;
+  max-width: 52ch;
+}
+
+.lyrics-teaser {
+  font-family: var(--font-noto-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #a1a1aa;
+  font-style: italic;
+  border-left: 2px solid var(--accent-gold);
+  padding-left: 12px;
+}
+
+/* Custom Music Player Frame (elevated from plain iframe) */
+.music-frame {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.6);
+}
+
+.music-frame::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.09) 0%,
-    rgba(255, 255, 255, 0.015) 28%,
-    transparent 52%,
-    rgba(255, 255, 255, 0.02) 78%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
+  background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, transparent 50%);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Bottom inner rim for liquid depth */
-.glass-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 -22px 18px -20px rgba(0, 0, 0, 0.55);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Subtle top-edge highlight (common in Aceternity / glass UIs) */
-.glass-card .glass-top-shine {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 38%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.11) 0%,
-    rgba(255, 255, 255, 0.03) 38%,
-    transparent 70%
-  );
-  pointer-events: none;
-  z-index: 3;
-  border-radius: inherit;
-}
-
-/* === Glare layer (inspired by Linear/Aceternity Glare Card) ===
-   Persistent soft glare + stronger on expand.
-*/
-.glass-card .glare-layer {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: 
-    radial-gradient(
-      circle at 28% 22%,
-      rgba(255, 255, 255, 0.22) 0%,
-      rgba(255, 255, 255, 0.08) 32%,
-      transparent 58%
-    ),
-    radial-gradient(
-      circle at 72% 78%,
-      rgba(255, 255, 255, 0.12) 0%,
-      transparent 52%
-    );
-  pointer-events: none;
-  z-index: 4;
-  opacity: 0.65;
-  mix-blend-mode: screen;
-  transition: opacity 0.4s ease;
-}
-
-.glass-card.expanded .glare-layer {
-  opacity: 0.9;
-  background: 
-    radial-gradient(
-      circle at 26% 18%,
-      rgba(255, 255, 255, 0.32) 0%,
-      rgba(255, 255, 255, 0.1) 28%,
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 74% 82%,
-      rgba(255, 255, 255, 0.18) 0%,
-      transparent 50%
-    );
-}
-
-/* === Tracing Glowing Border (gentle edge trace on expand) ===
-   Multi-layer CSS mask technique for clean "light tracing the perimeter".
-   Replicates high-end motion glass cards.
-*/
-.glass-card.tracing::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  padding: 1.5px;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(255, 255, 255, 0.82) 11%,
-    rgba(255, 255, 255, 0.95) 16%,
-    transparent 26%,
-    transparent 74%,
-    rgba(255, 255, 255, 0.75) 84%,
-    rgba(255, 255, 255, 0.9) 89%,
-    transparent 100%
-  );
-  border-radius: inherit;
-  -webkit-mask: 
-    linear-gradient(#000 0 0) content-box, 
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: 
-    linear-gradient(#000 0 0) content-box, 
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  z-index: 6;
-  pointer-events: none;
-  animation: trace-glow var(--trace-speed) linear infinite;
-  opacity: 0.9;
-}
-
-@keyframes trace-glow {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* The letter itself - cinematic, premium */
-.big-letter {
-  font-family: var(--font-playfair);
-  font-size: clamp(3.75rem, 26vw, 8.25rem);
-  line-height: 0.82;
-  font-weight: 700;
-  letter-spacing: -0.065em;
-  color: #f4f4f5;
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.35),
-    0 10px 20px rgba(0, 0, 0, 0.25);
-  user-select: none;
-  transition: transform 0.2s cubic-bezier(0.23, 1.0, 0.32, 1), 
-              text-shadow 0.2s ease;
-}
-
-.glass-card:hover .big-letter,
-.glass-card.expanded .big-letter {
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.4),
-    0 14px 28px rgba(0, 0, 0, 0.35);
-}
-
-/* Expanded content typography - highly readable on mobile */
-.message-text {
-  font-family: var(--font-outfit);
-  font-size: 15.5px;
-  line-height: 1.55;
-  color: #e4e4e7;
-  font-weight: 400;
-}
-
-/* YouTube embed container - clean inside glass */
-.video-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 1.25rem;
-  overflow: hidden;
-  background: #000;
-  box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.06), 0 4px 12px -2px rgb(0 0 0 / 0.6);
-}
-
-.video-frame iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 1.25rem;
-}
-
-/* Subtle interactive affordance */
-.letter-header {
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-.letter-header:active {
-  opacity: 0.92;
-}
-
-/* Smooth close button */
-.close-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 20;
-  width: 30px;
-  height: 30px;
+/* Progress / HUD */
+.journey-progress {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 8px;
+  background: rgba(10,10,16,0.7);
+  padding: 6px 10px;
   border-radius: 9999px;
-  background: rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.75);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.progress-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.25);
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-.close-btn:hover,
-.close-btn:active {
-  background: rgba(255,255,255,0.16);
-  color: #fff;
+.progress-dot.active {
+  background: var(--accent-gold);
+  width: 22px;
+  border-radius: 9999px;
 }
 
-/* Layout transition polish */
-.motion-card {
-  will-change: transform, height;
+.progress-dot:hover {
+  background: var(--accent-rose);
 }
 
-/* Mobile optimizations */
+/* Reduced Motion Fallbacks (graceful 2D cinematic) */
+@media (prefers-reduced-motion: reduce) {
+  .three-canvas-container,
+  .cinematic-panel,
+  .letter-hero {
+    transition: none !important;
+    transform: none !important;
+  }
+  .particle-overlay {
+    display: none;
+  }
+}
+
+/* Mobile 9:16 + Performance Tweaks */
 @media (max-width: 420px) {
-  .glass-card {
-    border-radius: 1.85rem;
+  .letter-hero {
+    font-size: clamp(4rem, 32vw, 7.5rem);
   }
-  .big-letter {
-    font-size: clamp(3.6rem, 29vw, 7.6rem);
+  .cinematic-panel {
+    border-radius: 1.75rem;
   }
-  .message-text {
-    font-size: 15px;
+  .three-canvas-container {
+    border-radius: 1.5rem;
+  }
+  .journey-progress {
+    bottom: 16px;
+    padding: 4px 8px;
   }
 }
 
-/* Prevent any horizontal issues */
+/* Hide scrollbars globally for pure cinematic feel */
 * {
   scrollbar-width: none;
 }
 *::-webkit-scrollbar {
   display: none;
+}
+
+/* Subtle ambient glow utility for 3D integration */
+.ambient-glow {
+  box-shadow: 0 0 80px -20px rgb(244 211 94 / 0.12),
+              0 25px 50px -12px rgb(0 0 0 / 0.3);
 }
