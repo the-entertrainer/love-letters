@@ -58,7 +58,6 @@ function LiquidLetter({ letter, themeColor = '#f4d35e' }: { letter: string; them
       <Text
         ref={meshRef as any}
         fontSize={letterSize}
-        font="/fonts/PlayfairDisplay-Bold.ttf" // falls back gracefully if not present
         color="#ffffff"
         anchorX="center"
         anchorY="middle"
