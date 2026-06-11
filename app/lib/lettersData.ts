@@ -5,7 +5,7 @@ export interface LetterData {
   message: string;
   songTitle: string;
   artist: string;
-  language: 'Hindi' | 'English' | 'Tamil' | 'English/Spanish';
+  language: 'Hindi' | 'English' | 'Tamil' | 'English/Spanish' | 'Marathi';
   videoUrl: string; // full embed URL
   videoId: string;  // for thumbnail
   lyricsTeaser: string;
@@ -13,9 +13,9 @@ export interface LetterData {
 }
 
 // Curated romantic songs where TITLE STARTS WITH THE LETTER.
-// Mix of Tamil, Malayalam, English as requested. Messages lightly evolved to reference the song.
-// All embeds are public YouTube; verified/representative romantic tracks fitting the letter start.
-// Swap IDs if region/availability changes. Prioritized emotional, love-themed.
+// Mix of Tamil, Hindi, English, Marathi as per provided YouTube links. Messages are custom "is for" lines.
+// All embeds use the user-provided YouTube links for correct songs and thumbnails.
+// Prioritized emotional, love-themed tracks.
 export const lettersData: LetterData[] = [
   {
     id: 'J',
@@ -35,12 +35,12 @@ export const lettersData: LetterData[] = [
     letter: 'O',
     word: 'Obsessed',
     message: 'I\'m officially obsessed with you—like, "forgetting how to act normal in public" levels of obsessed.',
-    songTitle: 'Only Girl (In The World)',
-    artist: 'Rihanna',
-    language: 'English',
+    songTitle: 'Othaiyadi Pathayila',
+    artist: 'Anirudh Ravichander',
+    language: 'Tamil',
     videoUrl: 'https://www.youtube.com/embed/qP8e7lFdEho',
     videoId: 'qP8e7lFdEho',
-    lyricsTeaser: 'Only girl in the world... (You make me feel that way)',
+    lyricsTeaser: 'Othaiyadi pathayila... (From the movie Kanaa)',
     theme: 'deep-emerald',
   },
   {
@@ -72,14 +72,14 @@ export const lettersData: LetterData[] = [
   {
     id: 'P',
     letter: 'P',
-    word: 'Pulse',
-    message: 'You make my pulse race so fast I’m pretty sure I need to sign a liability waiver before taking you out.',
-    songTitle: 'Physical',
-    artist: 'Dua Lipa',
+    word: 'Perfect',
+    message: 'P is for Perfect. Well, almost. You do steal the covers.',
+    songTitle: 'Perfect',
+    artist: 'Ed Sheeran',
     language: 'English',
-    videoUrl: 'https://www.youtube.com/embed/9HDEHj2yzew',
-    videoId: '9HDEHj2yzew',
-    lyricsTeaser: 'Let me take you to the physical... (Heart racing)',
+    videoUrl: 'https://www.youtube.com/embed/2Vv-BfVoq4g',
+    videoId: '2Vv-BfVoq4g',
+    lyricsTeaser: 'I found a love... for me... (Darling, just dive right in...)',
     theme: 'soft-amber',
   },
   {
@@ -113,12 +113,12 @@ export const lettersData: LetterData[] = [
     letter: 'N',
     word: 'Naughty',
     message: "You have that perfectly naughty smile that tells me we're either going to have the absolute best time, or end up in trouble.",
-    songTitle: 'Nadiyon Paar (Let the Music Play Again)',
-    artist: 'Rashmeet Kaur, Shamur',
-    language: 'Hindi',
+    songTitle: 'Nauvari (नऊवारी पाहिजे)',
+    artist: 'Sanju Rathod',
+    language: 'Marathi',
     videoUrl: 'https://www.youtube.com/embed/MnGAYS-v7lQ',
     videoId: 'MnGAYS-v7lQ',
-    lyricsTeaser: 'Nadiyon paar... (Let the music take us away)',
+    lyricsTeaser: 'Nauvari... (Marathi song wanting a traditional saree)',
     theme: 'teal',
   },
   {
@@ -126,12 +126,12 @@ export const lettersData: LetterData[] = [
     letter: 'E',
     word: 'Energy',
     message: "I don't know what kind of chaotic, beautiful energy you're running on, but I want to match it for the rest of my life.",
-    songTitle: 'Euphoria',
-    artist: 'Loreen',
-    language: 'English',
+    songTitle: 'Ennamo Yeadho',
+    artist: 'Aalaap Raju, Prashanthini',
+    language: 'Tamil',
     videoUrl: 'https://www.youtube.com/embed/fq6egtAzaQM',
     videoId: 'fq6egtAzaQM',
-    lyricsTeaser: 'We are forever... (This energy is eternal)',
+    lyricsTeaser: 'Ennamo yeadho... (From the movie Ko)',
     theme: 'deep-rose',
   },
 ];
