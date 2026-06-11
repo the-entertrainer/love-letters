@@ -20,13 +20,17 @@ export default function SongPlayer({ videoUrl, videoId, songTitle, artist, langu
   const { currentId, isPlaying, toggle, setIsPlaying } = useSongState();
   const isCurrent = currentId === letterId;
   const [showPlayer, setShowPlayer] = useState(false);
-
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const [videoUnavailable, setVideoUnavailable] = useState(false);
 
   const handlePlay = () => {
+    if (videoUnavailable) {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+      return;
+    }
+
     if (window.innerWidth < 768) {
       // Mobile: open YouTube for best experience
-      window.open(videoUrl.replace('/embed/', '/watch?v='), '_blank');
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
       return;
     }
 
@@ -47,19 +51,31 @@ export default function SongPlayer({ videoUrl, videoId, songTitle, artist, langu
     setIsPlaying(false);
   };
 
+  const handlePlayerError = () => {
+    setVideoUnavailable(true);
+    setShowPlayer(false);
+    setIsPlaying(false);
+  };
+
+  const thumbnailSrc = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const fallbackThumbnail = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
   return (
     <div className="music-frame w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-      {/* Thumbnail area - always visible until play */}
+      {/* Thumbnail area - always visible, with reliable fallback and error handling */}
       {!showPlayer || !isCurrent ? (
         <div 
           onClick={handlePlay}
           className="relative aspect-video w-full cursor-pointer overflow-hidden group"
-          style={{
-            backgroundImage: `url(${thumbnailUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
         >
+          <img 
+            src={thumbnailSrc}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = fallbackThumbnail;
+            }}
+            className="absolute inset-0 w-full h-full object-cover"
+            alt={`${songTitle} thumbnail`}
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
           
           {/* Play overlay */}
@@ -77,6 +93,13 @@ export default function SongPlayer({ videoUrl, videoId, songTitle, artist, langu
           </div>
 
           <div className="absolute top-3 right-3 px-2 py-0.5 text-[9px] bg-black/70 rounded text-white/80">YT</div>
+
+          {/* Unavailable overlay */}
+          {videoUnavailable && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/80 text-center p-4 text-sm text-white/90">
+              Video unavailable in your region.<br />Tap the link below to open on YouTube.
+            </div>
+          )}
         </div>
       ) : (
         /* Player area */
@@ -101,6 +124,7 @@ export default function SongPlayer({ videoUrl, videoId, songTitle, artist, langu
               onPlayChange?.(false);
               triggerHeartBurst();
             }}
+            onError={handlePlayerError}
             config={{
               youtube: {
                 // @ts-expect-error
@@ -140,7 +164,7 @@ export default function SongPlayer({ videoUrl, videoId, songTitle, artist, langu
           </button>
 
           <a
-            href={videoUrl.replace('/embed/', '/watch?v=')}
+            href={`https://www.youtube.com/watch?v=${videoId}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/80 transition-colors border border-white/20"
