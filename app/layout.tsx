@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${outfit.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[#050507] text-white">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#050507] text-white overflow-x-hidden">{children}</body>
     </html>
   );
 }
