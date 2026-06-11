@@ -16,7 +16,7 @@ interface LetterSectionProps {
 }
 
 export default function LetterSection({ data, isOpen, onToggle, index }: LetterSectionProps) {
-  const { letter, message, songTitle, artist, language, videoUrl, lyricsTeaser, theme } = data;
+  const { letter, message, songTitle, artist, language, videoUrl, videoId, lyricsTeaser, theme } = data;
 
   // Theme accent mapping
   const accent = 
@@ -103,7 +103,7 @@ export default function LetterSection({ data, isOpen, onToggle, index }: LetterS
                   </div>
                   <SongPlayer
                     videoUrl={videoUrl}
-                    videoId={(data as any).videoId || ''}
+                    videoId={videoId}
                     songTitle={songTitle}
                     artist={artist}
                     language={language}
